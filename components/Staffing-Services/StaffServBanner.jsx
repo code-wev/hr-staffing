@@ -6,11 +6,10 @@ import { MdArrowOutward } from "react-icons/md";
 const StaffServBanner = () => {
   return (
     <section className="relative w-full h-[75vh] min-h-[550px] flex items-center justify-center">
-      
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/About/AboutBanner.jpg" 
+          src="/About/AboutBanner.jpg"
           alt="Staffing Banner"
           fill
           priority
@@ -24,12 +23,13 @@ const StaffServBanner = () => {
       {/* Content */}
       <div className="relative z-10 max-w-3xl text-center px-6">
         {/* Heading */}
-        <h1 className="text-white text-[42px] md:text-[52px] font-semibold leading-tight">
-          Comprehensive Staffing <br /> Solutions Tailored for You
+        <h1 className="text-white  text-[30px]  md:text-[42px] lg:text-[52px] font-semibold leading-tight">
+          Comprehensive Staffing <br className="hidden md:flex" /> Solutions
+          Tailored for You
         </h1>
 
         {/* Subtitle */}
-        <p className="text-gray-200 text-[15px] max-w-2xl mx-auto mt-4 leading-relaxed">
+        <p className="text-gray-200 text-sm md:text-[16px] max-w-2xl mx-auto mt-4 leading-relaxed">
           At VIVD, we understand that building the right team — or finding the
           right role — is more than process; it’s partnership. Whether you’re an
           organization looking to scale with confidence, or a candidate seeking

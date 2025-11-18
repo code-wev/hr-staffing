@@ -72,43 +72,57 @@ const JobList = () => {
     <section className="w-full bg-white py-12">
       <div className="max-w-6xl mx-auto px-4">
 
-        {/* JOB LIST */}
-        <div className="divide-y divide-gray-200">
+        {/* MOBILE/TABLET SCROLL ONLY */}
+        <div className="overflow-x-auto lg:overflow-visible">
+          <table className="w-full border-collapse">
 
-          {jobs.map((job, i) => (
-            <div
-              key={i}
-              className="py-6 flex items-start justify-between gap-6 text-sm"
-            >
-              {/* LEFT - TITLE */}
-              <div className="w-1/4">
-                <h3 className="font-medium text-[16px] text-gray-900">{job.title}</h3>
-                <p className="text-gray-500 text-[16px] mt-1">{job.reqId}</p>
-              </div>
+            <tbody>
+              {jobs.map((job, i) => (
+                <tr key={i} className="border-b border-gray-200">
 
-              {/* MIDDLE - LOCATION */}
-              <div className="w-1/2">
-                <p className="text-gray-800 font-medium text-[16px] mb-1">Location</p>
-                <p className="text-gray-600 text-[16px] leading-relaxed">
-                  {job.location}
-                </p>
-              </div>
+                  {/* TITLE — LG NORMAL / MD/SM NO WRAP */}
+                  <td className="py-6 w-1/4 align-top lg:whitespace-normal whitespace-nowrap md:min-w-[240px]">
+                    <h3 className="font-medium text-[16px] text-gray-900 whitespace-inherit">
+                      {job.title}
+                    </h3>
+                    <p className="text-gray-500 text-[16px] mt-1 whitespace-inherit">
+                      {job.reqId}
+                    </p>
+                  </td>
 
-              {/* RIGHT - CATEGORY + APPLY BUTTON */}
-              <div className="w-1/4 flex items-start justify-between">
-                <div>
-                  <p className="text-gray-800 font-medium text-[16px] mb-1">
-                    Categories
-                  </p>
-                  <p className="text-gray-600 text-[16px]">{job.category}</p>
-                </div>
+                  {/* LOCATION — LG NORMAL / MD-SM NO WRAP */}
+                  <td className="py-6 w-1/2 align-top lg:whitespace-normal whitespace-nowrap md:min-w-[460px]">
+                    <p className="text-gray-800 font-medium text-[16px] mb-1 whitespace-inherit">
+                      Location
+                    </p>
+                    <p className="text-gray-600 text-[16px] leading-relaxed whitespace-inherit">
+                      {job.location}
+                    </p>
+                  </td>
 
-                <button className="bg-[#0497AE] text-white flex items-center gap-1 px-4 py-2 rounded-full text-[16px] shadow hover:bg-[#037e92] transition mt-3">
-                  Apply <FiArrowUpRight />
-                </button>
-              </div>
-            </div>
-          ))}
+                  {/* CATEGORY + BUTTON */}
+                  <td className="py-6 w-1/4 align-top lg:whitespace-normal whitespace-nowrap md:min-w-[260px]">
+                    <div className="flex items-start justify-between whitespace-nowrap">
+                      <div>
+                        <p className="text-gray-800 font-medium text-[16px] mb-1 whitespace-inherit">
+                          Categories
+                        </p>
+                        <p className="text-gray-600 text-[16px] whitespace-inherit">
+                          {job.category}
+                        </p>
+                      </div>
+
+                      <button className="bg-[#0497AE] text-white flex items-center gap-1 px-4 py-2 rounded-full text-[16px] shadow hover:bg-[#037e92] transition mt-3 whitespace-nowrap">
+                        Apply <FiArrowUpRight />
+                      </button>
+                    </div>
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+
+          </table>
         </div>
 
         {/* PAGINATION */}

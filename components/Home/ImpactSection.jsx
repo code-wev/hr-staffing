@@ -7,8 +7,8 @@ const ImpactSection = () => {
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Top Text */}
-        <div className="flex justify-between items-start mb-12">
-          <h2 className="text-[32px] font-semibold text-[#2C3E50] leading-snug">
+        <div className="flex-row md:flex justify-between items-start mb-12">
+          <h2 className="text-[32px] mb-5 md:mb-0 font-semibold text-[#2C3E50]">
             Connecting People, <br /> Creating Impact.
           </h2>
 
