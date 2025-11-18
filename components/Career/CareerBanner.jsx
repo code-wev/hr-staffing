@@ -8,7 +8,7 @@ const CareerBanner = () => {
 
       {/* Background Image */}
       <Image
-            src="/career/careerbanner.jpg"
+            src="/Career/careerbanner.jpg"
         alt="Career Banner"
         fill
         priority
