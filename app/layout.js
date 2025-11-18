@@ -1,5 +1,7 @@
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/Shared/NavBar";
+import Footer from "@/components/Shared/Footer";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -14,9 +16,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html>
+    <html lang="en">
       <body className={manrope.className}>
+        <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
