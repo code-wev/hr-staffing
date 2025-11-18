@@ -10,7 +10,7 @@ const ContactStartBanner = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/About/aboutbanner.jpg"
+          src="/About/AboutBanner.jpg"
           alt="Contact Banner"
           fill
           priority

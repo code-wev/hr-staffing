@@ -58,7 +58,7 @@ const ContactUsSection = () => {
         {/* RIGHT IMAGE */}
         <div className="relative h-[260px] md:h-full w-full">
           <Image
-            src="/contact/contact2.jpg"
+            src="/Contact/contact2.jpg"
             alt="Contact Team"
             fill
             priority

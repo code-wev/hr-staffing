@@ -9,7 +9,7 @@ const HomeBanner = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/home/HomeBanner.jpg"  
+          src="/Home/HomeBanner.jpg"  
           alt="Hero Banner"
           fill
           priority
