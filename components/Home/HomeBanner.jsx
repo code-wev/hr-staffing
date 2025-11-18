@@ -22,7 +22,7 @@ const HomeBanner = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-3xl text-center px-6">
-        <h1 className="text-white text-[64px] font-semibold leading-tight drop-shadow-lg">
+        <h1 className="text-white text-[36px]  md:text-[42px] lg:text-[64px] font-semibold leading-tight drop-shadow-lg">
           Empowering Careers.
           <br />
           Building Teams.
