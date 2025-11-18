@@ -6,11 +6,10 @@ import { MdArrowOutward } from "react-icons/md";
 const AboutBanner = () => {
   return (
     <section className="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center">
-      
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/About/AboutBanner.jpg" 
+          src="/About/AboutBanner.jpg"
           alt="About Banner"
           fill
           priority
@@ -23,17 +22,17 @@ const AboutBanner = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-3xl text-center px-6">
-        
         {/* Main Heading */}
-        <h1 className="text-white text-[54px] md:text-[64px] font-semibold leading-tight drop-shadow-lg">
-          Staffing “Our Purpose is
-          <br />
-          People.”
+        <h1
+          className="
+    text-white text-[34px] sm:text-[40px]  md:text-[46px] lg:text-[64px] font-semibold leading-[1.15] drop-shadow-lg"
+        >
+          Staffing “Our Purpose is People.”
         </h1>
 
         {/* Subtitle */}
         <p className="text-gray-200 max-w-[540px] mx-auto mt-4 text-[16px] leading-relaxed">
-          At VIVD, we believe every great business begins with the right people. 
+          At VIVD, we believe every great business begins with the right people.
           We’re more than a staffing agency — we’re a human connection company.
         </p>
 

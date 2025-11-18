@@ -25,12 +25,12 @@ const ContactStartBanner = () => {
       <div className="relative z-10 text-center max-w-3xl px-6">
 
         {/* Main Heading */}
-        <h1 className="text-white text-[48px] md:text-[64px] font-semibold leading-tight mb-4">
+        <h1 className="text-white text-[30px]  md:text-[42px] lg:text-[52px] font-semibold leading-tight mb-4">
           Let’s Start the <br /> Conversation
         </h1>
 
         {/* Sub text */}
-        <p className="text-gray-200 text-[16px] max-w-lg mx-auto leading-relaxed">
+        <p className="text-gray-200 text-16px md:text-[16px] max-w-lg mx-auto leading-relaxed">
           Whether you’re looking for your next opportunity or ready to grow 
           your team, VIVD is here to guide you. Let’s make the connection that 
           moves your goals forward.

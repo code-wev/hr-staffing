@@ -6,13 +6,12 @@ import { FiArrowUpRight } from "react-icons/fi";
 const AboutSection = () => {
   return (
     <section className="w-full bg-white">
-      <div className="flex flex-col md:flex-row w-full h-[720px]">
+      <div className="flex flex-col md:flex-row w-full md:h-[720px]">
 
         {/* LEFT SIDE */}
-        <div className="w-full md:w-1/2 bg-[#6F6F6F] text-white flex items-center px-10 md:px-16">
-          <div className="">
-
-            <h2 className="text-3xl md:text-[32px] font-semibold mb-16">
+        <div className="w-full md:w-1/2 bg-[#6F6F6F] text-white flex items-center px-10 md:px-16 py-12 md:py-0">
+          <div>
+            <h2 className="text-3xl md:text-[32px] font-semibold mb-10 md:mb-16">
               Built on Purpose. Driven by People.
             </h2>
 
@@ -33,15 +32,16 @@ const AboutSection = () => {
         </div>
 
         {/* RIGHT SIDE IMAGE */}
-        <div className="w-full md:w-1/2 relative">
+        <div className="w-full md:w-1/2 relative h-[300px] md:h-auto">
           <Image
             src="/Home/purpose.jpg"
             alt="Team Working"
             fill
-            className="object-cover object-center"
             priority
+            className="object-cover object-center"
           />
         </div>
+
       </div>
     </section>
   );
