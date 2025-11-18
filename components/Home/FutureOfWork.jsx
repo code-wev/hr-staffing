@@ -4,7 +4,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 const FutureOfWork = () => {
   return (
-    <section className="w-full py-20 bg-white">
+    <section className="w-full py-36 bg-white">
       <div className="max-w-3xl mx-auto text-center px-6">
 
         {/* Heading */}
