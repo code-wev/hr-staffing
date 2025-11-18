@@ -1,13 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdArrowOutward } from "react-icons/md";
+import { FiMenu, FiX } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -18,24 +20,22 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className="w-full bg-[#0097B2]">
+    <nav className="w-full bg-[#0097B2] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* LEFT — Logo */}
-        <div className="flex items-center">
-          <Link href="/">
-            <Image
-              src="/logo.png"      
-              alt="logo"
-              width={55}
-              height={55}
-              className="rounded-full cursor-pointer"
-            />
-          </Link>
-        </div>
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={55}
+            height={55}
+            className="rounded-full cursor-pointer"
+          />
+        </Link>
 
-        {/* CENTER — Menu */}
-        <div className="flex items-center space-x-5 text-white text-[16px]">
+        {/* CENTER — Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-5 text-white text-[16px]">
           {menuItems.map((item) => (
             <Link
               key={item.path}
@@ -43,8 +43,6 @@ const NavBar = () => {
               className="relative pb-1 hover:opacity-80 transition"
             >
               {item.name}
-
-              {/* underline active link */}
               {pathname === item.path && (
                 <span className="absolute left-0 -bottom-[2px] w-full h-[1px] bg-white"></span>
               )}
@@ -52,8 +50,8 @@ const NavBar = () => {
           ))}
         </div>
 
-        {/* RIGHT — Get Started Button */}
-        <div>
+        {/* RIGHT — Desktop Button */}
+        <div className="hidden md:block">
           <Link
             href="/get-started"
             className="bg-white text-[16px] px-6 py-2 rounded-full shadow-sm hover:bg-gray-100 transition flex items-center gap-1"
@@ -62,7 +60,45 @@ const NavBar = () => {
           </Link>
         </div>
 
+        {/* MOBILE — Hamburger Icon */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-white text-3xl"
+        >
+          {open ? <FiX /> : <FiMenu />}
+        </button>
       </div>
+
+      {/* MOBILE MENU DROPDOWN */}
+      {open && (
+        <div className="md:hidden bg-[#0097B2] text-white px-6 py-4 space-y-4">
+
+          {menuItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              onClick={() => setOpen(false)}
+              className="block text-[16px] pb-1 relative w-fit"
+            >
+              {item.name}
+
+              {/* FIXED MOBILE UNDERLINE */}
+              {pathname === item.path && (
+                <span className="absolute left-0 bottom-0 h-[1px] bg-white w-full"></span>
+              )}
+            </Link>
+          ))}
+
+          {/* MOBILE Get Started Button */}
+          <Link
+            href="/get-started"
+            onClick={() => setOpen(false)}
+            className="block bg-white text-[#0097B2] text-[16px] w-fit px-6 py-2 rounded-full shadow-sm hover:bg-gray-100 transition flex items-center gap-1"
+          >
+            Get Started <MdArrowOutward />
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };
