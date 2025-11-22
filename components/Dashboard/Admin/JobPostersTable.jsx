@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FiSearch, FiChevronRight, FiTrash2 } from "react-icons/fi";
 
 export default function JobPostersTable() {
@@ -109,9 +110,11 @@ export default function JobPostersTable() {
 
               <td className="py-4">
                 <div className="flex items-center gap-4">
-                  <button className="text-[#0097B2] text-sm hover:underline">
+                 <Link href="/dashboard/job-poster">
+                    <button className="text-[#0097B2] text-sm hover:underline">
                     View Profile
                   </button>
+                 </Link>
 
                   <FiChevronRight className="text-gray-600 text-lg cursor-pointer hover:text-black" />
                   <FiTrash2 className="text-gray-600 text-lg cursor-pointer hover:text-red-600" />
