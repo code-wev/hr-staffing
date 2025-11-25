@@ -49,6 +49,10 @@ export const authOptions = {
     }),
   ],
 
+  pages: {
+    signIn: "/auth/signin",
+  },
+
   callbacks: {
     // 🔥 Attach user data to JWT
     async jwt({ token, user }) {
@@ -67,10 +71,6 @@ export const authOptions = {
       }
       return session;
     },
-  },
-
-  pages: {
-    signIn: "/auth/signin",
   },
 
   secret: process.env.NEXTAUTH_SECRET,
