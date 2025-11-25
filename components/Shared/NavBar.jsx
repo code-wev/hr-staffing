@@ -53,7 +53,7 @@ const NavBar = () => {
         {/* RIGHT — Desktop Button */}
         <div className="hidden md:block">
           <Link
-            href="/get-started"
+            href="/auth"
             className="bg-white text-[16px] px-6 py-2 rounded-full shadow-sm hover:bg-gray-100 transition flex items-center gap-1"
           >
             Get Started <MdArrowOutward />
@@ -91,7 +91,7 @@ const NavBar = () => {
 
           {/* MOBILE Get Started Button */}
           <Link
-            href="/get-started"
+            href="/auth"
             onClick={() => setOpen(false)}
             className="block bg-white text-[#0097B2] text-[16px] w-fit px-6 py-2 rounded-full shadow-sm hover:bg-gray-100 transition flex items-center gap-1"
           >
