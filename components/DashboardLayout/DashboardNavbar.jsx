@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiChevronDown, FiGrid, FiUser, FiLogOut } from "react-icons/fi";
+import { signOut } from "next-auth/react";   // ✅ ADDED
 
 export default function DashboardNavbar() {
   const [open, setOpen] = useState(false);
@@ -24,15 +25,12 @@ export default function DashboardNavbar() {
     <div className="w-full bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
       {/* LEFT SECTION */}
       <div className="flex items-center gap-3">
-        {/* Icon Box */}
         <div className="w-9 h-9 border border-gray-300 rounded-md flex items-center justify-center">
           <FiGrid className="text-gray-600" size={18} />
         </div>
 
-        {/* Divider */}
         <div className="w-px h-6 bg-gray-300"></div>
 
-        {/* Title */}
         <h2 className="text-gray-700 text-sm font-medium">Dashboard</h2>
       </div>
 
@@ -60,6 +58,7 @@ export default function DashboardNavbar() {
         {/* DROPDOWN MENU */}
         {open && (
           <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-md py-1 z-50">
+
             <Link
               href="/dashboard/profile"
               className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
@@ -70,10 +69,15 @@ export default function DashboardNavbar() {
 
             <hr className="my-1 border-gray-200" />
 
-            <button className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+            {/* ✅ FIXED LOGOUT BUTTON */}
+            <button
+              onClick={() => signOut({ callbackUrl: "/auth/signin" })}  // logout redirect
+              className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+            >
               <FiLogOut size={16} className="text-gray-600" />
               Logout
             </button>
+
           </div>
         )}
       </div>

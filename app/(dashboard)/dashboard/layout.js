@@ -1,24 +1,12 @@
-import { Manrope } from "next/font/google";
-import "../../globals.css";
+"use client";
+
+import { SessionProvider } from "next-auth/react";
 import DashboardLayout from "@/components/DashboardLayout/DashBoardLayout";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-manrope",
-});
-
-export const metadata = {
-  title: "HR & Staffing",
-  description: "",
-};
-
-export default function DashboardRootLayout({ children }) {
+export default function DashboardClientLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={manrope.className}>
-        <DashboardLayout>{children}</DashboardLayout>
-      </body>
-    </html>
+    <SessionProvider>
+      <DashboardLayout>{children}</DashboardLayout>
+    </SessionProvider>
   );
 }
