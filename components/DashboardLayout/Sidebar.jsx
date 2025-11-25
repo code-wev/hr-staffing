@@ -3,14 +3,38 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiX, FiGrid } from "react-icons/fi";
-
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 export default function Sidebar({ onClose }) {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
-  // 🔥 Default menu (You can replace later when auth is ready)
-  const sidebarItems = [
+  // 🔥 Get role from session (client / applicant / admin)
+  const role = session?.user?.role;
+
+  // ================================
+  // ROLE-BASED MENU CONFIG
+  // ================================
+  const menuByRole = {
+    client: [
+     
+      { name: "My Jobs", icon: <FiGrid />, href: "/client/jobs" },
+    ],
+
+    applicant: [
+
+      { name: "Profile", icon: <FiGrid />, href: "/applicant/profile" },
+    ],
+
+    admin: [
+      { name: "Dashboard", icon: <FiGrid />, href: "/dashboard" },
+     
+    ],
+  };
+
+  // Default fallback if no session yet
+  const sidebarItems = menuByRole[role] || [
     { name: "Dashboard", icon: <FiGrid />, href: "/dashboard" },
   ];
 
@@ -34,7 +58,6 @@ export default function Sidebar({ onClose }) {
           />
           <h2 className="text-lg font-semibold">Board</h2>
 
-          {/* Mobile Close (Only visible on small screens) */}
           <button
             onClick={onClose}
             className="lg:hidden ml-auto p-2 rounded-md hover:bg-white/10"
