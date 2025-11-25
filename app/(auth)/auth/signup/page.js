@@ -35,7 +35,7 @@ export default function SignupPage() {
         name,
         email,
         password,
-        role: activeTab, // client/applicant
+        role: activeTab,
       }),
     });
 
@@ -45,7 +45,7 @@ export default function SignupPage() {
       alert(data.message);
     } else {
       alert("Account created successfully!");
-      window.location.href = "/auth/signin";
+      window.location.href = "/dashboard";
     }
   }
 
