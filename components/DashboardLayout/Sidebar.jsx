@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiX, FiGrid } from "react-icons/fi";
+import { FiX, FiGrid, FiUsers } from "react-icons/fi";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { PiBagSimpleFill } from "react-icons/pi";
 
 export default function Sidebar({ onClose }) {
   const pathname = usePathname();
@@ -18,19 +19,23 @@ export default function Sidebar({ onClose }) {
   // ================================
   const menuByRole = {
     client: [
-     
-      { name: "My Jobs", icon: <FiGrid />, href: "/client/jobs" },
-    ],
-
-    applicant: [
-
-      { name: "Profile", icon: <FiGrid />, href: "/applicant/profile" },
-    ],
-
-    admin: [
       { name: "Dashboard", icon: <FiGrid />, href: "/dashboard" },
-     
+
+      {
+        name: "Create job post",
+        icon: <FiUsers />,
+        href: "/dashboard/create-job",
+      },
+      {
+        name: "My Jobs",
+        icon: <PiBagSimpleFill />,
+        href: "/dashboard/my-jobs",
+      },
     ],
+
+    applicant: [{ name: "Dashboard", icon: <FiGrid />, href: "/dashboard" }],
+
+    admin: [{ name: "Dashboard", icon: <FiGrid />, href: "/dashboard" }],
   };
 
   // Default fallback if no session yet
