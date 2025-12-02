@@ -80,7 +80,7 @@ export default function ApplicationsPage() {
         {stats.map((item, i) => (
           <div
             key={i}
-            className="border border-gray-200 rounded-xl p-5 flex items-center gap-4"
+            className="bg-[#F5F5F5] rounded-xl p-5 flex items-center gap-4"
           >
             <div className="text-gray-700">{item.icon}</div>
             <div>
