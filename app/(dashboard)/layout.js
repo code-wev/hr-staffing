@@ -1,5 +1,6 @@
 import { Manrope } from "next/font/google";
 import "../globals.css";
+import Providers from "@/components/Shared/Providers";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -15,7 +16,12 @@ export const metadata = {
 export default function DashboardServerLayout({ children }) {
   return (
     <html lang="en">
-      <body className={manrope.className}>{children}</body>
+      <body className={manrope.className}>
+
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
