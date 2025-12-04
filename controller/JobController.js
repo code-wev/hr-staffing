@@ -11,7 +11,9 @@ export const saveJob = async(data)=>{
 
 
 export const updateJob = async (data) => {
-    const id = data?.id;
+
+    console.log(data, "kire vai");
+    const id = data?._id;
 
     const updated = await JobModel.updateOne(
         { _id: id },

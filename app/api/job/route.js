@@ -1,5 +1,6 @@
-import { saveJob } from "@/controller/JobController";
+import { saveJob, updateJob } from "@/controller/JobController";
 import { connectDB } from "@/lib/db";
+import JobModel from "@/models/JobModel";
 import { NextResponse } from "next/server"
 
 export const POST = async(req, res)=>{
@@ -25,4 +26,52 @@ export const POST = async(req, res)=>{
         }, {status:500})
     }
 }
+
+
+
+
+export const GET = async(req, res)=>{
+
+    await connectDB();
+    try {
+
+
+        const data = await JobModel.find();
+        return NextResponse.json({
+            message:"Success",
+            data
+        })
+        
+    } catch (error) {
+        console.log(error, "ay na tui kase");
+        return NextResponse.json({
+            error,
+            message:error?.message
+        }, {status:500})
+    }
+}
+
+
+
+export const PUT = async(req, res)=>{
+    try {
+        const data = await req.json();
+        const updated = await updateJob(data);
+       
+        return NextResponse.json({
+            message:"Success",
+            data:updated
+        }, {status:200})
+
+        
+    } catch (error) {
+        return NextResponse.json({
+            error,
+            message: error?.message
+        }, {status:500})
+    }
+}
+
+
+
 
