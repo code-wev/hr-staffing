@@ -3,6 +3,7 @@ import "../globals.css";
 import NavBar from "@/components/Shared/NavBar";
 import Footer from "@/components/Shared/Footer";
 import Providers from "@/components/Shared/Providers";
+import { Toaster } from "react-hot-toast";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={manrope.className}>
         <Providers>
+          <Toaster/>
           <NavBar />
           {children}
           <Footer />
