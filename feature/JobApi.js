@@ -42,18 +42,17 @@ export const JobApi = createApi({
       }),
       invalidatesTags: ["Job"],
     }),
-    singleJob:builder.query({
-      query:(id)=> `/job/${id}`
+    singleJob: builder.query({
+      query: (id) => `/job/${id}`,
     }),
     updateJob: builder.mutation({
-      query:(data)=>({
-        url:'/job',
-        method:"PUT",
-        body:data
+      query: (data) => ({
+        url: "/job",
+        method: "PUT",
+        body: data,
       }),
-            invalidatesTags: ["Job"],
-    })
-
+      invalidatesTags: ["Job"],
+    }),
   }),
 });
 
@@ -64,5 +63,5 @@ export const {
   useAllJobQuery,
   useMyJobOverviewMutation,
   useSingleJobQuery,
-  useUpdateJobMutation
+  useUpdateJobMutation,
 } = JobApi;
