@@ -24,7 +24,7 @@ export default function MyJobsPage() {
 
   // Fetch jobs
   const { data: myJob, isLoading, error, refetch } = useMyJobQuery(email);
-  const [deleteJob, {isLoading:deleteLoading}]  = useDeleteJobMutation()
+  const [deleteJob, { isLoading: deleteLoading }] = useDeleteJobMutation();
 
   // Delete mutation
   // const [deleteJob] = useDeleteJobMutation();
@@ -203,12 +203,12 @@ export default function MyJobsPage() {
                   </td>
                   {/* Action */}
                   <td className="py-4 px-4 flex items-center gap-4">
-                    <Link href={`/dashboard/manage-jobs/${job._id}`}>
-                      <button className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 transition-colors">
+                    <Link href={`#`}>
+                      <button className="flex items-center gap-1 cursor-pointer text-sm text-blue-600 hover:text-blue-800 transition-colors">
                         View <FiExternalLink size={15} />
                       </button>
                     </Link>
-                    <Link href={`/job/edit/${job._id}`}>
+                    <Link href={`/dashboard/my-jobs/edit/${job?._id}`}>
                       <button className="text-gray-600 hover:text-black transition-colors">
                         <FiEdit2 size={16} />
                       </button>
