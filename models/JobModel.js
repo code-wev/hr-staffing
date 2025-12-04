@@ -28,6 +28,12 @@ const JobModel = new Schema({
         type: String,
         required: [true, "Job type is required"]
     },
+    status:{
+        type:String,
+        default:"active"
+      
+
+    },
     payType: {
         type: String,
         required: [true, "Pay Type is required"]

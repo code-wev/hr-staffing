@@ -1,12 +1,18 @@
 "use client";
-import { useCreateJobMutation } from "@/feature/JobApi";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useSingleJobQuery, useUpdateJobMutation } from "@/feature/JobApi";
+import { useParams, useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FiUploadCloud } from "react-icons/fi";
 import { LuCalendar } from "react-icons/lu";
 
-export default function CreateJobPost() {
+const Editpage = () => {
+  const { id } = useParams();
+  const router = useRouter();
+
+  const { data, isLoading, error } = useSingleJobQuery(id);
+  const jobData = data?.data;
+
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -19,9 +25,25 @@ export default function CreateJobPost() {
     description: "",
     companyPerks: [],
   });
-  const [createJob, { isLoading, isError, error }] = useCreateJobMutation();
-  const { data } = useSession();
-  const email = data?.user?.email;
+
+  const [updateJob, { isLoading: isUpdating }] = useUpdateJobMutation();
+
+  // Set form data when job data is loaded
+  useEffect(() => {
+    if (jobData) {
+      setFormData({
+        jobTitle: jobData.jobTitle || "",
+        department: jobData.department || "",
+        companyName: jobData.companyName || "",
+        location: jobData.location || "",
+        jobType: jobData.jobType || "",
+        payType: jobData.payType || "",
+        deadline: jobData.deadline ? jobData.deadline.split("T")[0] : "",
+        description: jobData.description || "",
+        companyPerks: jobData.companyPerks || [],
+      });
+    }
+  }, [jobData]);
 
   // ========== FILE UPLOAD HANDLER ==========
   const handleFileChange = (e) => {
@@ -55,54 +77,21 @@ export default function CreateJobPost() {
     });
   };
 
-  // ========== RESET FORM FUNCTION ==========
-  const resetForm = () => {
-    // Reset form state
-    setFormData({
-      jobTitle: "",
-      department: "",
-      companyName: "",
-      location: "",
-      jobType: "",
-      payType: "",
-      deadline: "",
-      description: "",
-      companyPerks: [],
-    });
-
-    // Reset file input
-    setFile(null);
-
-    // Reset all form elements
-    const formElements = document.querySelectorAll("input, select, textarea");
-    formElements.forEach((element) => {
-      if (element.type === "checkbox") {
-        element.checked = false;
-      } else if (element.type !== "file") {
-        element.value = "";
-      }
-    });
-
-    // Reset file input specifically
-    const fileInput = document.getElementById("fileInput");
-    if (fileInput) fileInput.value = "";
-  };
-
   // ========== FORM SUBMIT HANDLER ==========
-  const handlePublishJob = async () => {
+  const handleUpdateJob = async () => {
     try {
-      let imageUrl = "";
+      let imageUrl = jobData?.uploadFile || "";
 
-      // === Upload to imgBB only if file selected ===
+      // === Upload to imgBB only if new file selected ===
       if (file) {
-        const formData = new FormData();
-        formData.append("image", file);
+        const formDataObj = new FormData();
+        formDataObj.append("image", file);
 
         const uploadRes = await fetch(
           `https://api.imgbb.com/1/upload?key=b49a7cbd3d5227c273945bd7114783a9`,
           {
             method: "POST",
-            body: formData,
+            body: formDataObj,
           }
         );
 
@@ -111,38 +100,68 @@ export default function CreateJobPost() {
       }
 
       // === Prepare job data ===
-      const jobData = {
+      const updatedJobData = {
         ...formData,
         uploadFile: imageUrl,
-        jobPoster: email,
+        _id: id, // Include the job ID for update
       };
 
-      await createJob(jobData);
-      toast.success("Job Post created successfully");
+        await updateJob(updatedJobData);
+      toast.success("Job updated successfully");
 
-      // Reset form after successful submission
-      resetForm();
+      // Redirect to my jobs page or stay on edit page
+      router.push("/dashboard/my-jobs");
 
-      console.log("FINAL JOB DATA:", jobData);
+      console.log("UPDATED JOB DATA:", updatedJobData);
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to create job post");
-      console.error("Error publishing job:", error);
+      toast.error(error?.data?.message || "Failed to update job");
+      console.error("Error updating job:", error);
     }
   };
 
-  // ========== DISCARD BUTTON HANDLER ==========
-  const handleDiscard = () => {
-    if (confirm("Are you sure you want to discard all changes?")) {
-      resetForm();
-      toast.success("Form cleared");
+  // ========== CANCEL BUTTON HANDLER ==========
+  const handleCancel = () => {
+    if (confirm("Are you sure you want to discard changes?")) {
+      router.back();
     }
   };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !jobData) {
+    return (
+      <div className="w-full min-h-screen bg-white flex items-center justify-center">
+        <p className="text-red-500">
+          Error loading job data. Please try again.
+        </p>
+      </div>
+    );
+  }
+
+  // List of perks for checkbox
+  const allPerks = [
+    "Wellness services",
+    "Access to wellness facilities",
+    "Employee wellness programs",
+    "Schedule & flexibility",
+    "Part-time or full-time availability",
+    "Remote or hybrid options",
+    "Ability to set your own schedule",
+  ];
 
   return (
     <div className="w-full min-h-screen bg-white px-6 py-8">
       <Toaster />
       <h2 className="text-xl font-semibold text-gray-800 mb-6">
-        Create job post
+        Edit Job Post
       </h2>
 
       {/* ======================= GRID TOP ======================= */}
@@ -169,7 +188,7 @@ export default function CreateJobPost() {
             onChange={handleInputChange}
             className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           >
-            <option value="">Please select your province and region</option>
+            <option value="">Please select department</option>
             <option value="engineering">Engineering</option>
             <option value="marketing">Marketing</option>
             <option value="sales">Sales</option>
@@ -280,15 +299,7 @@ export default function CreateJobPost() {
         </label>
 
         <div className="flex flex-wrap gap-3 text-sm">
-          {[
-            "Wellness services",
-            "Access to wellness facilities",
-            "Employee wellness programs",
-            "Schedule & flexibility",
-            "Part-time or full-time availability",
-            "Remote or hybrid options",
-            "Ability to set your own schedule",
-          ].map((perk, i) => (
+          {allPerks.map((perk, i) => (
             <label
               key={i}
               className="flex items-center gap-2 border border-gray-300 rounded-md px-3 py-2 cursor-pointer hover:border-blue-500 transition-colors"
@@ -312,19 +323,36 @@ export default function CreateJobPost() {
 
         <div
           className={`w-full border border-dashed ${
-            file ? "border-[#0097B2] bg-blue-50" : "border-gray-300"
+            file || jobData?.uploadFile
+              ? "border-[#0097B2] bg-blue-50"
+              : "border-gray-300"
           } rounded-xl py-14 flex flex-col items-center justify-center cursor-pointer hover:border-[#0097B2] transition-colors`}
           onClick={() => document.getElementById("fileInput").click()}
         >
           <FiUploadCloud
             size={34}
-            className={`${file ? "text-[#0097B2]" : "text-gray-600"} mb-3`}
+            className={`${
+              file || jobData?.uploadFile ? "text-[#0097B2]" : "text-gray-600"
+            } mb-3`}
           />
           <p className="text-sm text-gray-600">
-            {file ? file.name : "Click to upload file or drag and drop"}
+            {file
+              ? file.name
+              : jobData?.uploadFile
+              ? "Current file uploaded. Click to change"
+              : "Click to upload file or drag and drop"}
           </p>
+          {jobData?.uploadFile && !file && (
+            <p className="text-xs text-green-600 mt-1">File already uploaded</p>
+          )}
           <p className="text-xs text-gray-500 mt-1">PNG, JPG up to 10MB</p>
         </div>
+
+        {jobData?.uploadFile && (
+          <div className="mt-2 text-sm text-gray-600">
+            Current file: {jobData.uploadFile.substring(0, 50)}...
+          </div>
+        )}
 
         <input
           id="fileInput"
@@ -338,17 +366,17 @@ export default function CreateJobPost() {
       {/* ======================= BUTTONS ======================= */}
       <div className="mt-10 flex items-center justify-end gap-3">
         <button
-          onClick={handleDiscard}
+          onClick={handleCancel}
           className="px-5 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors"
         >
-          Discard
+          Cancel
         </button>
         <button
-          onClick={handlePublishJob}
-          disabled={isLoading}
+          onClick={handleUpdateJob}
+          //   disabled={isUpdating}
           className="px-5 py-2 bg-[#0097B2] text-white rounded-md text-sm hover:bg-[#008199] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isLoading ? (
+          {isUpdating ? (
             <span className="flex items-center justify-center gap-2">
               <svg
                 className="animate-spin h-4 w-4 text-white"
@@ -370,13 +398,15 @@ export default function CreateJobPost() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-              Publishing...
+              Updating...
             </span>
           ) : (
-            "Publish Job"
+            "Update Job"
           )}
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default Editpage;
