@@ -149,6 +149,7 @@ export default function ApplicantDashboard() {
   const handleEditJob = (jobId) => {
     // Navigate to edit page
     window.location.href = `/dashboard/my-jobs/edit/${jobId}`;
+
   };
 
   // Loading state
