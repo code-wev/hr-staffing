@@ -22,6 +22,9 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
+    companyName:String,  // client
+    phoneNumber:String,
+    locaton:String,
 
     // "client" or "applicant" from your tabs
     role: {
