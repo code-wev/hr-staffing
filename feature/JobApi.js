@@ -53,6 +53,17 @@ export const JobApi = createApi({
       }),
       invalidatesTags: ["Job"],
     }),
+    allPoster:builder.query({
+      query:()=>`/allJobPoster`
+    }),
+    posterOverview:builder.query({
+      query:() => '/allJobPoster/overview'
+    }),
+    singleUser:builder.query({
+      query:(email) => `/singleUser/${email}`
+
+    })
+
   }),
 });
 
@@ -64,4 +75,7 @@ export const {
   useMyJobOverviewMutation,
   useSingleJobQuery,
   useUpdateJobMutation,
+  useAllPosterQuery,
+  usePosterOverviewQuery,
+  useSingleUserQuery
 } = JobApi;

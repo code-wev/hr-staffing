@@ -28,7 +28,8 @@ export const updateJob = async (data) => {
                 deadline: data.deadline,
                 description: data.description,
                 companyPerks: data.companyPerks,
-                uploadFile: data.uploadFile
+                uploadFile: data.uploadFile,
+                status:data.status
             }
         }
     );

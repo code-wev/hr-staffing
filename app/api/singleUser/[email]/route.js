@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/db";
-import JobModel from "@/models/JobModel";
+import User from "@/models/User";
 import { NextResponse } from "next/server";
 
 export const GET = async (req, context) => {
@@ -8,8 +8,9 @@ export const GET = async (req, context) => {
 
   try {
     // ✅ do NOT await
-    const id = params.id;
-    const response = await JobModel.find({ _id: id });
+    const email = params.email;
+    console.log(email, "email ayos na plz ");
+    const response = await User.find({ email: email });
 
     return NextResponse.json({
       message: "Success",
