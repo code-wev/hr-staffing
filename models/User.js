@@ -24,7 +24,9 @@ const UserSchema = new mongoose.Schema(
     },
     companyName:String,  // client
     phoneNumber:String,
-    locaton:String,
+    location:String,
+
+    profileImage: { type: String, default: "" },
 
     // "client" or "applicant" from your tabs
     role: {
