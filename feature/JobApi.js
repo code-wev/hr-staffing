@@ -58,6 +58,10 @@ export const JobApi = createApi({
     }),
     posterOverview:builder.query({
       query:() => '/allJobPoster/overview'
+    }),
+    singleUser:builder.query({
+      query:(email) => `/singleUser/${email}`
+
     })
 
   }),
@@ -72,5 +76,6 @@ export const {
   useSingleJobQuery,
   useUpdateJobMutation,
   useAllPosterQuery,
-  usePosterOverviewQuery
+  usePosterOverviewQuery,
+  useSingleUserQuery
 } = JobApi;

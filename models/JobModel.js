@@ -51,6 +51,6 @@ const JobModel = new Schema({
     uploadFile: {
         type: String
     }
-});
+} , {timestamps:true});
 
 export default mongoose.models.Job || mongoose.model("Job", JobModel);

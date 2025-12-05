@@ -158,7 +158,7 @@ export default function JobPostersTable() {
 
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-4">
-                      <Link href={`/dashboard/poster-profile/${poster._id}`}>
+                      <Link href={`/dashboard/poster-profile/${poster.email}`}>
                         <button className="text-[#0097B2] text-sm font-medium hover:underline hover:text-[#007a91] transition-colors">
                           View Profile
                         </button>
