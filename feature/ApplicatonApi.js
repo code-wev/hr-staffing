@@ -55,6 +55,18 @@ export const ApplicationApi = createApi({
       }),
       providesTags: (result, error, id) => [{ type: "Application", id }],
     }),
+
+    myApplication: builder.query({
+      query:(email) => ({
+
+        url:`my-application/${email}`,
+        method:"GET"
+
+
+
+      }),
+      providesTags:['Application']
+    }),
     
     // Get applications by user
     getMyApplications: builder.query({
@@ -83,4 +95,6 @@ export const {
   useUpdateApplicationStatusMutation,
   useGetSingleApplicationQuery,
   useGetMyApplicationsQuery,
+  useMyApplicationQuery
 } = ApplicationApi;
+

@@ -101,7 +101,7 @@ export default function PosterProfilepage() {
 
                 {/* ACTION BUTTON */}
                 <td className="py-4">
-               <Link href={`/dashboard/my-jobs/${345}`}>
+               <Link href={`/dashboard/my-jobs/${job?._idM}`}>
                   <button className="flex items-center gap-2 text-[#0097B2] hover:underline">
                     View details <FiArrowRight size={16} />
                   </button></Link>

@@ -1,14 +1,7 @@
-import { useSearchParams } from 'next/navigation';
-import React from 'react';
+import React from 'react'
 
-const JobDetailspage = () => {
-    const params = useSearchParams();
-    console.log(params, "this is params");
-    return (
-        <div>
-            
-        </div>
-    );
-};
-
-export default JobDetailspage;
+export default function page() {
+  return (
+    <div>page</div>
+  )
+}

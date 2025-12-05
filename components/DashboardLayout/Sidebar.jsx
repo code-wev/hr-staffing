@@ -6,6 +6,9 @@ import { FiX, FiGrid, FiUsers } from "react-icons/fi";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { PiBagSimpleFill } from "react-icons/pi";
+import { IoIosListBox } from "react-icons/io";
+
+
 
 export default function Sidebar({ onClose }) {
   const pathname = usePathname();
@@ -33,7 +36,9 @@ export default function Sidebar({ onClose }) {
       },
     ],
 
-    applicant: [{ name: "Dashboard", icon: <FiGrid />, href: "/dashboard" }],
+    applicant: [{ name: "Dashboard", icon: <FiGrid />, href: "/dashboard" },
+      
+      { name: "My Application", icon: <IoIosListBox />, href: "/dashboard/my-application" }],
 
     admin: [{ name: "Dashboard", icon: <FiGrid />, href: "/dashboard" }],
   };
