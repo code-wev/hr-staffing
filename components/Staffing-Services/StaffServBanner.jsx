@@ -40,14 +40,14 @@ const StaffServBanner = () => {
         {/* Buttons */}
         <div className="flex items-center justify-center gap-4 mt-8">
           <Link
-            href="/find-job"
+            href="/careers"
             className="bg-[#0497AE] text-white px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2 shadow hover:bg-[#03899c] transition"
           >
             Find A Job <MdArrowOutward />
           </Link>
 
           <Link
-            href="/hire-talent"
+            href="/careers"
             className="bg-white text-gray-900 px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2 shadow hover:bg-gray-100 transition"
           >
             Hire A Talent <MdArrowOutward />
