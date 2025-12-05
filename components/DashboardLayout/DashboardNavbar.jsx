@@ -34,8 +34,7 @@ export default function DashboardNavbar() {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Determine displayed name based on role
