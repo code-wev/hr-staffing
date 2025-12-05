@@ -203,7 +203,7 @@ export default function MyJobsPage() {
                   </td>
                   {/* Action */}
                   <td className="py-4 px-4 flex items-center gap-4">
-                    <Link href={`#`}>
+                    <Link href={`/dashboard/my-jobs/${job?._id}`}>
                       <button className="flex items-center gap-1 cursor-pointer text-sm text-blue-600 hover:text-blue-800 transition-colors">
                         View <FiExternalLink size={15} />
                       </button>

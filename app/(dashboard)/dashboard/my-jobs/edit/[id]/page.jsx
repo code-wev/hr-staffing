@@ -24,6 +24,7 @@ const Editpage = () => {
     deadline: "",
     description: "",
     companyPerks: [],
+    status: "active", // Added status field
   });
 
   const [updateJob, { isLoading: isUpdating }] = useUpdateJobMutation();
@@ -41,6 +42,7 @@ const Editpage = () => {
         deadline: jobData.deadline ? jobData.deadline.split("T")[0] : "",
         description: jobData.description || "",
         companyPerks: jobData.companyPerks || [],
+        status: jobData.status || "active", // Added status field
       });
     }
   }, [jobData]);
@@ -106,7 +108,7 @@ const Editpage = () => {
         _id: id, // Include the job ID for update
       };
 
-        await updateJob(updatedJobData);
+      await updateJob(updatedJobData);
       toast.success("Job updated successfully");
 
       // Redirect to my jobs page or stay on edit page
@@ -256,6 +258,20 @@ const Editpage = () => {
             <option value="monthly">Monthly</option>
             <option value="project">Project-based</option>
             <option value="commission">Commission</option>
+          </select>
+        </div>
+
+        {/* Status */}
+        <div className="flex flex-col">
+          <label className="text-sm text-gray-700 mb-1">Status</label>
+          <select
+            id="status"
+            value={formData.status}
+            onChange={handleInputChange}
+            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="active">Active</option>
+            <option value="expired">Expired</option>
           </select>
         </div>
 

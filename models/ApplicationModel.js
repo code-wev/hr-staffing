@@ -18,6 +18,10 @@ const ApplicationSchema = new Schema(
       type: String,
       required: [true, "CV/Resume file is required"],
     },
+    status:{
+      type:String,
+      default:""
+    },
 
     coverLetter: {
       type: String,
