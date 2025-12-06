@@ -45,12 +45,7 @@ const HomeBanner = () => {
             Find A Job <MdArrowOutward />
           </Link>
 
-          <Link
-            href="/careers"
-            className="bg-white text-gray-900 px-6 py-3 rounded-full text-sm font-medium shadow-md hover:bg-gray-100 transition flex items-center gap-2"
-          >
-            Hire A Talent <MdArrowOutward />
-          </Link>
+       
         </div>
       </div>
     </section>
