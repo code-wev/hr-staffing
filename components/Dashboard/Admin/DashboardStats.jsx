@@ -1,25 +1,29 @@
+'use client'
+import { usePosterOverviewQuery } from "@/feature/JobApi";
 import { FiUserPlus, FiUsers, FiBriefcase, FiGrid } from "react-icons/fi";
 
 export default function DashboardStats() {
+  const {data, isLoading, loading} =  usePosterOverviewQuery();
+  console.log(data, "aso amar kole");
   const stats = [
     {
       title: "Total Job Poster",
-      value: "1,247",
+      value: data?.allJobPoster,
       icon: <FiUserPlus className="text-xl text-gray-500" />,
     },
     {
       title: "Total Job Candidates",
-      value: "8,325",
+      value: data?.candidate,
       icon: <FiUsers className="text-xl text-gray-500" />,
     },
     {
       title: "Total Jobs",
-      value: "454",
+      value: data?.totalJob,
       icon: <FiBriefcase className="text-xl text-gray-500" />,
     },
     {
       title: "Total Applications",
-      value: "12,847",
+      value: data?.totalApplication,
       icon: <FiGrid className="text-xl text-gray-500" />,
     },
   ];

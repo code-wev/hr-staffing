@@ -6,6 +6,7 @@ import { FiX, FiGrid, FiUsers } from "react-icons/fi";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { PiBagSimpleFill } from "react-icons/pi";
+import { IoIosListBox } from "react-icons/io";
 
 export default function Sidebar({ onClose }) {
   const pathname = usePathname();
@@ -33,7 +34,15 @@ export default function Sidebar({ onClose }) {
       },
     ],
 
-    applicant: [{ name: "Dashboard", icon: <FiGrid />, href: "/dashboard" }],
+    applicant: [
+      { name: "Dashboard", icon: <FiGrid />, href: "/dashboard" },
+
+      {
+        name: "My Application",
+        icon: <IoIosListBox />,
+        href: "/dashboard/my-application",
+      },
+    ],
 
     admin: [{ name: "Dashboard", icon: <FiGrid />, href: "/dashboard" }],
   };
@@ -52,8 +61,9 @@ export default function Sidebar({ onClose }) {
   return (
     <aside className="w-[240px] h-screen bg-[#0097B2] text-white flex flex-col">
       {/* LOGO + TITLE */}
-      <Link href="/">
-        <div className="flex items-center gap-3 px-5 py-6 border-b border-white/20">
+
+      <div className="flex items-center gap-3 px-5 py-6 border-b border-white/20">
+        <Link href="/">
           <Image
             src="/logo.png"
             alt="Logo"
@@ -62,15 +72,15 @@ export default function Sidebar({ onClose }) {
             className="rounded-full border border-white/40"
           />
           <h2 className="text-lg font-semibold">Board</h2>
+        </Link>
 
-          <button
-            onClick={onClose}
-            className="lg:hidden ml-auto p-2 rounded-md hover:bg-white/10"
-          >
-            <FiX className="text-xl text-white" />
-          </button>
-        </div>
-      </Link>
+        <button
+          onClick={onClose}
+          className="lg:hidden ml-auto p-2 rounded-md hover:bg-white/10"
+        >
+          <FiX className="text-xl text-white" />
+        </button>
+      </div>
 
       {/* MENU */}
       <nav className="flex flex-col mt-4 px-2">

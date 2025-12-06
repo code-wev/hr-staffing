@@ -32,7 +32,7 @@ const IndustryExpertise = () => {
         </div>
 
         <Link
-          href="/services"
+          href="/staffing-services"
           className="inline-flex items-center gap-2 bg-white text-gray-900 px-6 py-4 rounded-full text-sm font-medium shadow hover:bg-gray-100 transition"
         >
           What We Can Do For You? <FiArrowUpRight className="text-[16px]" />

@@ -35,7 +35,6 @@ function SigninForm() {
 
   return (
     <>
-      {/* Show error from URL */}
       {error && (
         <p className="text-red-500 text-sm text-center mb-3">
           {error === "CredentialsSignin"
@@ -44,7 +43,7 @@ function SigninForm() {
         </p>
       )}
 
-      {/* ============== FORM ============== */}
+      {/* FORM */}
       <form className="space-y-5" onSubmit={handleLogin}>
         {/* EMAIL */}
         <div>
@@ -100,20 +99,21 @@ export default function SigninPage() {
       <div className="absolute left-0 top-0 h-full w-[10px] bg-[#008297]" />
 
       <div className="flex flex-col flex-1">
+        
         {/* TOP BAR */}
-        <div className="w-full flex items-center justify-between px-10 py-6">
+        <div className="w-full flex items-center justify-between px-6 md:px-10 py-6">
           <Link href="/">
             <div className="flex items-center gap-3">
               <Image
                 src="/logo.png"
-                width={50}
-                height={50}
+                width={45}
+                height={45}
                 alt="logo"
-                className="rounded-full"
+                className="rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px]"
               />
               <div className="leading-tight">
-                <p className="font-semibold text-[#1A1A1A] text-[14px]">VIVD</p>
-                <p className="text-[12px] text-gray-500 -mt-1">
+                <p className="font-semibold text-[#1A1A1A] text-[13px] md:text-[14px]">VIVD</p>
+                <p className="text-[11px] md:text-[12px] text-gray-500 -mt-1">
                   HR & Staffing
                 </p>
               </div>
@@ -122,27 +122,32 @@ export default function SigninPage() {
         </div>
 
         {/* SIGNIN CARD */}
-        <div className="flex flex-1 items-center justify-center pb-10">
-          <div className="bg-white w-[450px] rounded-xl shadow-[0_4px_25px_rgba(0,0,0,0.08)] px-10 py-10">
-
-            <h1 className="text-center text-[22px] font-semibold mb-8">
+        <div className="flex flex-1 items-center justify-center pb-10 px-4">
+          <div className="
+              bg-white 
+              w-full 
+              max-w-[450px] 
+              rounded-xl 
+              shadow-[0_4px_25px_rgba(0,0,0,0.08)] 
+              px-6 md:px-10 
+              py-10
+            "
+          >
+            <h1 className="text-center text-[20px] md:text-[22px] font-semibold mb-8">
               Sign In
             </h1>
 
-            {/* FIX: WRAP ONLY THE PART USING useSearchParams */}
+            {/* SUSPENSE WRAPPED FORM */}
             <Suspense fallback={<div>Loading...</div>}>
               <SigninForm />
             </Suspense>
 
             {/* FOOTER LINK */}
-            <div className="flex items-center justify-between mt-6 text-[13px]">
+            <div className="flex items-center justify-between mt-6 text-[12px] md:text-[13px]">
               <Link href="/auth/signup" className="text-[#008297] hover:underline">
                 Don’t have an account?
               </Link>
 
-              <Link href="/auth/forgot" className="text-[#008297] hover:underline">
-                Forgot password?
-              </Link>
             </div>
 
           </div>

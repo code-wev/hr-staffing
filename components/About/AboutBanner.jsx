@@ -39,18 +39,13 @@ const AboutBanner = () => {
         {/* CTA Buttons */}
         <div className="flex items-center justify-center gap-4 mt-8">
           <Link
-            href="/find-job"
+            href="/careers"
             className="bg-[#0497AE] text-white px-6 py-3 rounded-full text-sm font-medium shadow-md hover:bg-[#03899c] transition flex items-center gap-2"
           >
             Find A Job <MdArrowOutward />
           </Link>
 
-          <Link
-            href="/hire-talent"
-            className="bg-white text-gray-900 px-6 py-3 rounded-full text-sm font-medium shadow-md hover:bg-gray-100 transition flex items-center gap-2"
-          >
-            Hire A Talent <MdArrowOutward />
-          </Link>
+     
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@
 
 import { useMyApplicationQuery } from "@/feature/ApplicatonApi";
 import { useSession } from "next-auth/react";
-import { FiUsers, FiClock, FiCheckCircle, FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiUsers, FiClock, FiCheckCircle, FiArrowRight, FiChevronLeft, FiChevronRight, FiX, FiFileText, FiDollarSign, FiPhone, FiMail, FiCalendar, FiBriefcase } from "react-icons/fi";
 import { useState, useMemo } from "react";
 
 export default function ApplicationsPage() {
@@ -15,6 +15,10 @@ export default function ApplicationsPage() {
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  // Modal state
+  const [selectedApplication, setSelectedApplication] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Calculate stats from real data
   const totalApplications = applicationsData.length;
@@ -50,6 +54,18 @@ export default function ApplicationsPage() {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()}`;
+  };
+
+  // Format date and time for modal
+  const formatDateTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   };
 
   // Map API data to table format
@@ -129,6 +145,21 @@ export default function ApplicationsPage() {
     }
   };
 
+  // Modal handlers
+  const openModal = (application) => {
+    setSelectedApplication(application);
+    setIsModalOpen(true);
+    // Prevent background scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedApplication(null);
+    // Restore background scrolling
+    document.body.style.overflow = 'auto';
+  };
+
   // Badge color system identical to Figma
   const badgeColors = {
     "pending": "bg-yellow-100 text-yellow-700",
@@ -168,7 +199,7 @@ export default function ApplicationsPage() {
     <div className="w-full px-8 py-10 bg-white">
 
       {/* =================== TOP STATS =================== */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
         {stats.map((item, i) => (
           <div
             key={i}
@@ -181,11 +212,11 @@ export default function ApplicationsPage() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* =================== TABLE TITLE =================== */}
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-xl font-semibold text-gray-800">Recent Applications</h2>
+        <h2 className="text-xl font-semibold text-gray-800">My Applications</h2>
         <div className="text-sm text-gray-600">
           Showing {startIndex + 1}-{Math.min(endIndex, tableApplications.length)} of {tableApplications.length} applications
         </div>
@@ -223,7 +254,10 @@ export default function ApplicationsPage() {
                   </td>
 
                   <td className="py-4">
-                    <button className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium">
+                    <button 
+                      onClick={() => openModal(app.fullData)}
+                      className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium"
+                    >
                       View details <FiArrowRight size={15} />
                     </button>
                   </td>
@@ -276,6 +310,157 @@ export default function ApplicationsPage() {
           >
             Next <FiChevronRight />
           </button>
+        </div>
+      )}
+
+      {/* =================== APPLICATION DETAILS MODAL =================== */}
+      {isModalOpen && selectedApplication && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-800">Application Details</h2>
+                <p className="text-gray-600 mt-1">Complete application information</p>
+              </div>
+              <button 
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100"
+              >
+                <FiX size={24} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6">
+              {/* Application Status Badge */}
+              <div className="mb-6">
+                <span className={`px-4 py-2 rounded-lg font-medium ${badgeColors[selectedApplication.applicationStatus] || badgeColors["pending"]}`}>
+                  Status: {selectedApplication.applicationStatus?.charAt(0).toUpperCase() + selectedApplication.applicationStatus?.slice(1) || "Pending"}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Left Column - Personal Information */}
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                      <FiBriefcase /> Job Information
+                    </h3>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-sm text-gray-600">Job ID</p>
+                        <p className="font-medium">{selectedApplication.job || "Not specified"}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Job Poster</p>
+                        <p className="font-medium">{selectedApplication.jobPoster || "Not specified"}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                      <FiFileText /> Personal Information
+                    </h3>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-sm text-gray-600">Full Name</p>
+                        <p className="font-medium">{selectedApplication.firstName} {selectedApplication.lastName}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Email</p>
+                        <p className="font-medium flex items-center gap-2">
+                          <FiMail size={14} /> {selectedApplication.applicant}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Phone</p>
+                        <p className="font-medium flex items-center gap-2">
+                          <FiPhone size={14} /> {selectedApplication.phone || selectedApplication.phoneNumber || "Not specified"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column - Application Details */}
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                      <FiCalendar /> Application Timeline
+                    </h3>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-sm text-gray-600">Applied On</p>
+                        <p className="font-medium">{formatDateTime(selectedApplication.createdAt)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Last Updated</p>
+                        <p className="font-medium">{formatDateTime(selectedApplication.updatedAt)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                      <FiDollarSign /> Salary & Documents
+                    </h3>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-sm text-gray-600">Expected Salary</p>
+                        <p className="font-medium">
+                          {selectedApplication.expectedSalary ? `$${selectedApplication.expectedSalary}` : "Not specified"}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">CV/Resume</p>
+                        {selectedApplication.cv ? (
+                          <a 
+                            href={selectedApplication.cv} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="font-medium text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2"
+                          >
+                            <FiFileText size={14} /> View CV
+                          </a>
+                        ) : (
+                          <p className="font-medium text-gray-500">Not provided</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Cover Letter Section */}
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Cover Letter</h3>
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  {selectedApplication.coverLetter ? (
+                    <p className="text-gray-700 whitespace-pre-wrap">{selectedApplication.coverLetter}</p>
+                  ) : (
+                    <p className="text-gray-500 italic">No cover letter provided</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Application ID */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <p className="text-sm text-gray-500">Application ID: {selectedApplication._id}</p>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="sticky bottom-0 bg-white border-t border-gray-200 p-6 flex justify-end">
+              <button
+                onClick={closeModal}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

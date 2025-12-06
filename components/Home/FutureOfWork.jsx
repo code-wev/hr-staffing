@@ -24,19 +24,13 @@ const FutureOfWork = () => {
 
           {/* Blue Button */}
           <Link
-            href="/find-job"
+            href="/careers"
             className="bg-[#0497AE] text-white px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2 shadow hover:bg-[#03889c] transition"
           >
             Find A Job <FiArrowUpRight className="text-[16px]" />
           </Link>
 
-          {/* White Button */}
-          <Link
-            href="/hire-talent"
-            className="bg-white border border-gray-400 text-gray-800 px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2 hover:bg-gray-100 transition"
-          >
-            Hire A Talent <FiArrowUpRight className="text-[16px]" />
-          </Link>
+        
 
         </div>
 

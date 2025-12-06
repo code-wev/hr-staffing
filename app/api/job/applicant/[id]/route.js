@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/db";
+import ApplicationModel from "@/models/ApplicationModel";
 import JobModel from "@/models/JobModel";
 import { NextResponse } from "next/server";
 
@@ -9,7 +10,7 @@ export const GET = async (req, context) => {
   try {
     // ✅ do NOT await
     const id = params.id;
-    const response = await JobModel.find({ _id: id });
+    const response = await ApplicationModel.find({ job: id });
 
     return NextResponse.json({
       message: "Success",
