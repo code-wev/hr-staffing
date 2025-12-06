@@ -10,13 +10,14 @@ export const GET = async (req, context) => {
     // ✅ do NOT await
     const email = params.email;
     console.log(email, "hey amar personal email")
-    const response = await ApplicationModel.find({ applicant:email });
+    const response = await ApplicationModel.find({ applicant:email }).populate("job");
 
     return NextResponse.json({
       message: "Success",
       data: response,
     });
   } catch (error) {
+    console.log(error, "kire");
     return NextResponse.json(
       {
         error,
