@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FiChevronDown, FiGrid, FiUser, FiLogOut } from "react-icons/fi";
 import { signOut } from "next-auth/react";
 
-export default function DashboardNavbar() {
+export default function DashboardNavbar({ onMenuClick }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -52,9 +52,12 @@ export default function DashboardNavbar() {
     <div className="w-full bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
       {/* LEFT SECTION */}
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 border border-gray-300 rounded-md flex items-center justify-center">
+        <button
+          className="lg:hidden w-9 h-9 border border-gray-300 rounded-md flex items-center justify-center"
+          onClick={onMenuClick}
+        >
           <FiGrid className="text-gray-600" size={18} />
-        </div>
+        </button>
 
         <div className="w-px h-6 bg-gray-300"></div>
 
