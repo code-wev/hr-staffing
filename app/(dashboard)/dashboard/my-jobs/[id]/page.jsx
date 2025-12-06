@@ -1,5 +1,5 @@
 "use client";
-
+// export const dynamic = "force-dynamic";
 import {
   useAllApplicantQuery,
   useUpdateApplicationStatusMutation,
@@ -642,9 +642,9 @@ export default function JobDetailsPage() {
         </div>
       )}
 
-      {/* ------------------------------------------------------------- */}
+
       {/* ---------------------- APPLICANT MODAL ----------------------- */}
-      {/* ------------------------------------------------------------- */}
+
 
       {isModalOpen && selectedApplicant && (
         <div className="fixed inset-0 backdrop-blur-sm  bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -818,3 +818,7 @@ export default function JobDetailsPage() {
     </div>
   );
 }
+
+
+
+
