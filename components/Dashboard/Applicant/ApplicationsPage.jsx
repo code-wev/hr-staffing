@@ -259,7 +259,7 @@ export default function ApplicationsPage() {
 
       {/* =================== TABLE =================== */}
       <div className="overflow-x-auto">
-        <table className=" text-left text-sm">
+        <table className="min-w-full text-left text-sm">
           <thead>
             <tr className="border-b border-gray-200 text-gray-500 font-medium">
               <th className="py-3">Job Title</th>
