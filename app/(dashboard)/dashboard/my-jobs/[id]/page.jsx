@@ -228,7 +228,7 @@ export default function JobDetailsPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className=" mx-auto p-6">
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
         {/* Total Applicants */}
@@ -674,9 +674,7 @@ export default function JobDetailsPage() {
                   </svg>
                 </button>
               </div>
-              <p className="text-gray-600 mt-1">
-                Application ID: {selectedApplicant._id}
-              </p>
+           
             </div>
 
             {/* Modal Body */}
