@@ -17,8 +17,8 @@ const Footer = () => {
               <Image
                 src="/logo.png"
                 alt="VIVID"
-                width={32}
-                height={32}
+                width={70}
+                height={70}
                 className="rounded-full"
               />
               <span className="text-lg font-semibold">VIVID</span>
@@ -29,6 +29,8 @@ const Footer = () => {
               and employers seeking excellence. Our platform streamlines
               recruitment and empowers applicants to showcase their talent.
             </p>
+
+            <p className="text-sm leading-relaxed max-w-xs opacity-90 mt-4">2 North Central Ave, Suite 1800, Phoenix, AZ 85004</p>
 
             {/* Social Icons */}
             <div className="flex items-center gap-4 mt-5">

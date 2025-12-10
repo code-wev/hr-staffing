@@ -29,8 +29,8 @@ const NavBar = () => {
           <Image
             src="/logo.png"
             alt="logo"
-            width={55}
-            height={55}
+            width={70}
+            height={70}
             className="rounded-full cursor-pointer"
           />
         </Link>

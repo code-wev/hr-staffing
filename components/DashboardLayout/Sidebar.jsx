@@ -62,16 +62,16 @@ export default function Sidebar({ onClose }) {
     <aside className="w-[240px] h-screen bg-[#0097B2] text-white flex flex-col">
       {/* LOGO + TITLE */}
 
-      <div className="flex items-center gap-3 px-5 py-6 border-b border-white/20">
+      <div className="flex justify-center items-center gap-3 px-5 py-6 border-b border-white/20">
         <Link href="/">
           <Image
             src="/logo.png"
             alt="Logo"
-            width={42}
-            height={42}
+            width={80}
+            height={80}
             className="rounded-full border border-white/40"
           />
-          <h2 className="text-lg font-semibold">Board</h2>
+          <h2 className="text-lg text-center font-semibold">Board</h2>
         </Link>
 
         <button
