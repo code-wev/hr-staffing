@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -30,13 +30,43 @@ const Footer = () => {
               recruitment and empowers applicants to showcase their talent.
             </p>
 
-            <p className="text-sm leading-relaxed max-w-xs opacity-90 mt-4">2 North Central Ave, Suite 1800, Phoenix, AZ 85004</p>
+            <p className="text-sm leading-relaxed max-w-xs opacity-90 mt-4">
+              2 North Central Ave, Suite 1800, Phoenix, AZ 85004
+            </p>
 
             {/* Social Icons */}
             <div className="flex items-center gap-4 mt-5">
-              <FaFacebookF className="text-white text-[16px] cursor-pointer hover:opacity-80" />
-              <FaInstagram className="text-white text-[16px] cursor-pointer hover:opacity-80" />
-              <FaWhatsapp className="text-white text-[16px] cursor-pointer hover:opacity-80" />
+              <a
+                href="https://www.linkedin.com/company/vividhrstaffing/?viewAsMember=true"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedinIn className="text-white text-[16px] cursor-pointer hover:opacity-80" />
+              </a>
+
+              <a
+                href="https://www.facebook.com/profile.php?id=100075964055618"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebookF className="text-white text-[16px] cursor-pointer hover:opacity-80" />
+              </a>
+
+              <a
+                href="https://www.instagram.com/vividhrstaffing/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram className="text-white text-[16px] cursor-pointer hover:opacity-80" />
+              </a>
+
+              <a
+                href="https://wa.me/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp className="text-white text-[16px] cursor-pointer hover:opacity-80" />
+              </a>
             </div>
           </div>
 
